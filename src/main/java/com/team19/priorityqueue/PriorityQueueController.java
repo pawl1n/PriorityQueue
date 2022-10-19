@@ -1,18 +1,21 @@
 package com.team19.priorityqueue;
 
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.util.PriorityQueue;
 import java.util.Random;
 
 public class PriorityQueueController {
-    private final PriorityQueue<Node<Integer>> queue = new PriorityQueue<>(Node::compareTo);
+    private final PriorityQueue<QueueNode<Integer>> queue = new PriorityQueue<>(QueueNode::compareTo);
     private final Random random = new Random();
 
     @FXML
@@ -31,18 +34,13 @@ public class PriorityQueueController {
 
     @FXML
     private void add() {
-        Circle circle = new Circle(20);
-        circle.setFill(Color.WHITE);
-        circle.setStrokeWidth(5);
 
         int val = random.nextInt(10);
 
-        Text text = new Text(Integer.valueOf(val).toString());
-        StackPane stackPane = new StackPane(circle, text);
-
-        queue.add(new Node<>(stackPane, val, val));
+        QueueNode<Integer> queueNode = new QueueNode<>(val, val);
+        queue.add(queueNode);
         System.out.println(queue);
-        flowPane.getChildren().add(stackPane);
+        flowPane.getChildren().add(queueNode.stackPane());
 
         redrawNodes();
     }
@@ -55,28 +53,43 @@ public class PriorityQueueController {
 
     @FXML
     private void poll() {
-        Node<Integer> node = queue.poll();
-        if (node != null) {
-            flowPane.getChildren().remove(node.stackPane());
+        QueueNode<Integer> queueNode = queue.poll();
+
+        if (queueNode != null) {
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200));
+            scaleTransition.setNode(queueNode.stackPane());
+            scaleTransition.setFromX(1);
+            scaleTransition.setFromY(1);
+            scaleTransition.setToX(0);
+            scaleTransition.setToY(0);
+            scaleTransition.setCycleCount(1);
+            scaleTransition.setAutoReverse(false);
+            scaleTransition.play();
+
+            scaleTransition.setOnFinished(event -> {
+                flowPane.getChildren().remove(queueNode.stackPane());
+                redrawNodes();
+            });
         }
-        redrawNodes();
+
         System.out.println(queue);
     }
 
     private void redrawNodes() {
-        for (Node<Integer> node : queue) {
-            flowPane.getChildren().remove(node.stackPane());
+        for (QueueNode<Integer> queueNode : queue) {
+            flowPane.getChildren().remove(queueNode.stackPane());
         }
 
-        for (Node<Integer> node : queue) {
-            StackPane stackPane = node.stackPane();
-            Circle circle = (Circle) stackPane.getChildren().get(0);
-            if (flowPane.getChildren().size() == 0) {
-                circle.setStroke(Color.RED);
-            } else {
-                circle.setStroke(Color.web("F2DF3A"));
-            }
+        for (QueueNode<Integer> queueNode : queue) {
+            StackPane stackPane = queueNode.stackPane();
+
+            queueNode.circle().setStroke(Color.web("F2DF3A"));
             flowPane.getChildren().add(stackPane);
+        }
+
+        QueueNode<Integer> peek = queue.peek();
+        if (peek != null) {
+            peek.circle().setStroke(Color.RED);
         }
     }
 
