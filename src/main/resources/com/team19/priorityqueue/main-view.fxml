@@ -95,11 +95,11 @@
    </right>
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
          <content>
-            <FlowPane fx:id="flowPane" alignment="CENTER" hgap="20.0" prefWrapLength="650.0" vgap="20.0" />
+            <FlowPane fx:id="flowPane" alignment="CENTER" hgap="20.0" prefWrapLength="650.0" vgap="20.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding></FlowPane>
          </content>
       </ScrollPane>
    </center>
