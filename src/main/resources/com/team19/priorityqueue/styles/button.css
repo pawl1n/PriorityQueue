@@ -9,7 +9,3 @@
 .button: pressed {
     -fx-background-color : #15A5ED;
 }
-
-/* .button: focused {
-    -fx-background-color : #15A5ED;
-} */
