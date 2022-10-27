@@ -30,7 +30,7 @@
    <right>
       <ToolBar minWidth="150.0" orientation="VERTICAL" style="-fx-background-color: #3AB4F2;">
         <items>
-            <Button fx:id="addButton" alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#add" stylesheets="@styles/button.css" text="Add" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Button alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#add" stylesheets="@styles/button.css" text="Add" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Segoe UI Bold" size="14.0" />
                </font>
@@ -42,7 +42,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="peekButton" alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#peek" stylesheets="@styles/button.css" text="Peek" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Button alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#peek" stylesheets="@styles/button.css" text="Peek" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Segoe UI Bold" size="14.0" />
                </font>
@@ -54,7 +54,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="pollButton" alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#poll" stylesheets="@styles/button.css" text="Poll" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Button alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#poll" stylesheets="@styles/button.css" text="Poll" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Segoe UI Bold" size="14.0" />
                </font>
@@ -66,7 +66,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="sizeButton" alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@styles/button.css" text="Size" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Button alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#size" stylesheets="@styles/button.css" text="Size" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Segoe UI Bold" size="14.0" />
                </font>
@@ -78,7 +78,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="removeButton" alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" stylesheets="@styles/button.css" text="Remove" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
+            <Button alignment="BASELINE_LEFT" ellipsisString="" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#remove" stylesheets="@styles/button.css" text="Remove" textAlignment="CENTER" textFill="WHITE" textOverrun="CLIP">
                <font>
                   <Font name="Segoe UI Bold" size="14.0" />
                </font>
