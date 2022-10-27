@@ -32,9 +32,6 @@ public class PriorityQueueController {
             redrawNodes();
         });
 
-        queueNode.stackPane().getStyleClass().add("stackPane");
-        queueNode.circle().getStyleClass().add("circle");
-
         redrawNodes();
     }
 
