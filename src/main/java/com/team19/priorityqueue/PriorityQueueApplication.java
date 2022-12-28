@@ -17,13 +17,12 @@ public class PriorityQueueApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setMinHeight(500);
-        stage.setMinWidth(850);
-        stage.setMaxHeight(500);
-        stage.setMaxWidth(850);
+        stage.setMinHeight(550);
+        stage.setMinWidth(860);
+        stage.setMaxHeight(550);
+        stage.setMaxWidth(860);
 
         stage.setResizable(false);
-
     }
 
     public static void main(String[] args) {

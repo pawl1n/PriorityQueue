@@ -3,27 +3,43 @@ package com.team19.priorityqueue;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import java.util.PriorityQueue;
-import java.util.Random;
-
 public class PriorityQueueController {
-    private final PriorityQueue<QueueNode<Integer>> queue = new PriorityQueue<>(QueueNode::comparePriorityTo);
-    private final Random random = new Random();
-    private QueueNode<Integer> selectedNode;
+    private final PriorityQueue<QueueNode<String>> queue = new PriorityQueue<>();
+    private QueueNode<String> selectedNode;
 
     @FXML
     private FlowPane flowPane;
 
     @FXML
-    private void add() {
-        int val = random.nextInt(10);
+    private TextField valueTextField;
 
-        QueueNode<Integer> queueNode = new QueueNode<>(val, val);
+    @FXML
+    private TextField priorityTextField;
+
+    @FXML
+    private void add() {
+        String value = valueTextField.getText();
+
+        int priority;
+        try {
+            priority = Integer.parseInt(priorityTextField.getText());
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid number passed as priority");
+            alert.setContentText("Enter valid number in priority field");
+
+            alert.showAndWait();
+            return;
+        }
+
+        QueueNode<String> queueNode = new QueueNode<>(value, priority);
         queue.add(queueNode);
         flowPane.getChildren().add(queueNode.stackPane());
 
@@ -37,7 +53,7 @@ public class PriorityQueueController {
 
     @FXML
     private void peek() {
-        QueueNode<Integer> peek = queue.peek();
+        QueueNode<String> peek = queue.peek();
         if (peek == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
@@ -47,12 +63,12 @@ public class PriorityQueueController {
             alert.showAndWait();
             return;
         }
-        peek.circle().setStroke(Color.RED);
+        peek.rectangle().setStroke(Color.RED);
     }
 
     @FXML
     private void poll() {
-        QueueNode<Integer> queueNode = queue.poll();
+        QueueNode<String> queueNode = queue.poll();
 
         if (queueNode == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -96,24 +112,24 @@ public class PriorityQueueController {
     }
 
     private void redrawNodes() {
-        for (QueueNode<Integer> queueNode : queue) {
+        for (QueueNode<String> queueNode : queue) {
             flowPane.getChildren().remove(queueNode.stackPane());
         }
 
-        for (QueueNode<Integer> queueNode : queue) {
+        for (QueueNode<String> queueNode : queue) {
             StackPane stackPane = queueNode.stackPane();
 
             if (selectedNode != null && queueNode == selectedNode) {
-                queueNode.circle().setStroke(Color.web("F2AE3A"));
+                queueNode.rectangle().setStroke(Color.web("F2AE3A"));
             } else {
-                queueNode.circle().setStroke(Color.web("F2DF3A"));
+                queueNode.rectangle().setStroke(Color.web("F2DF3A"));
             }
 
             flowPane.getChildren().add(stackPane);
         }
     }
 
-    private void removeNodeFromFlowPane(QueueNode<Integer> node) {
+    private void removeNodeFromFlowPane(QueueNode<String> node) {
         if (node == null) return;
 
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200));
