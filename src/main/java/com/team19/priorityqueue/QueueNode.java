@@ -56,7 +56,9 @@ public class QueueNode<T> implements Comparable<QueueNode<?>> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         QueueNode<?> queueNode = (QueueNode<?>) o;
-        return priority == queueNode.priority && Objects.equals(stackPane, queueNode.stackPane) && Objects.equals(value, queueNode.value) && Objects.equals(rectangle, queueNode.rectangle);
+
+        return priority == queueNode.priority && Objects.equals(stackPane, queueNode.stackPane) &&
+                Objects.equals(value, queueNode.value) && Objects.equals(rectangle, queueNode.rectangle);
     }
 
     @Override
