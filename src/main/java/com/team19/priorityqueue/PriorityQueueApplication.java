@@ -15,14 +15,9 @@ public class PriorityQueueApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("PriorityQueue");
         stage.setScene(scene);
-        stage.show();
-
-        stage.setMinHeight(550);
-        stage.setMinWidth(860);
-        stage.setMaxHeight(550);
-        stage.setMaxWidth(860);
-
         stage.setResizable(false);
+
+        stage.show();
     }
 
     public static void main(String[] args) {
