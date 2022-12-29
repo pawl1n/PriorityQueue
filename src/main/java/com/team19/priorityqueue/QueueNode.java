@@ -9,12 +9,29 @@ import javafx.scene.text.TextFlow;
 
 import java.util.Objects;
 
+/**
+ * Вузол черги
+ * value - значення вузла
+ * priority - пріорітетність вузла
+ * rectangle - тіло вузла
+ * stackPane - панель відображення вузла
+ */
 public class QueueNode<T> implements Comparable<QueueNode<?>> {
     private final StackPane stackPane;
     private final T value;
     private final int priority;
     private final Rectangle rectangle;
 
+    /**
+     * Конструктор вузла
+     * value - значення вузла
+     * priority - пріорітетність вузла
+     * rectangle - об'єкт тіла вузла
+     * stringValue - літерне значення вузла
+     * valueText - значення вузла в потріному форматі для запису в тіло
+     * priorityText - пріорітет вузла в потріному форматі для запису в тіло
+     * stackPane - панель відображення вузлів
+     */
     public QueueNode(T value, int priority) {
         rectangle = new Rectangle(80,40);
         rectangle.setFill(Color.WHITE);
@@ -39,14 +56,23 @@ public class QueueNode<T> implements Comparable<QueueNode<?>> {
         this.priority = priority;
     }
 
+    /**
+     * Повертає обьект тіла вузла
+     */
     public Rectangle rectangle() {
         return rectangle;
     }
 
+    /**
+     * Повертає панель вузлів
+     */
     public StackPane stackPane() {
         return stackPane;
     }
 
+    /**
+     * Повертає пріоритет вузла
+     */
     private int priority() {
         return this.priority;
     }
@@ -64,6 +90,11 @@ public class QueueNode<T> implements Comparable<QueueNode<?>> {
         return Objects.hash(stackPane, value, priority, rectangle);
     }
 
+    /**
+     * Порівнює пріоритети вузлів
+     * @param queueNode об'єкт, з яким необхідно порівняти
+     * @return результат порівняння пріоритетів
+     */
     @Override
     public int compareTo(QueueNode<?> queueNode) {
         return Integer.compare(priority, queueNode.priority);

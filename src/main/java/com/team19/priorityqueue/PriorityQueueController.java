@@ -9,6 +9,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+/**
+ * Контролер для елементів керування
+ * queue - черга
+ * flowPane - Панель відображення черги
+ * valueTextField - поле вводу для значення вузла
+ * priorityTextField - поле вводу для пріорітетності вузла
+ */
 public class PriorityQueueController {
     private final PriorityQueue<QueueNode<String>> queue = new PriorityQueue<>();
     private QueueNode<String> selectedNode;
@@ -22,6 +29,10 @@ public class PriorityQueueController {
     @FXML
     private TextField priorityTextField;
 
+    /**
+     * Додає новий елемент в чергу.
+     * Бере значення з полів в які інформацію вводить користувач
+     */
     @FXML
     private void add() {
         String value = valueTextField.getText();
@@ -51,6 +62,9 @@ public class PriorityQueueController {
         redrawNodes();
     }
 
+    /**
+     * Знаходження та видалення елемента з найбільшим пріорітетом
+     */
     @FXML
     private void peek() {
         QueueNode<String> peek = queue.peek();
@@ -66,6 +80,9 @@ public class PriorityQueueController {
         peek.rectangle().setStroke(Color.RED);
     }
 
+    /**
+     * Видаляє елемент з найбільшою пріорітетністю
+     */
     @FXML
     private void poll() {
         QueueNode<String> queueNode = queue.poll();
@@ -83,6 +100,9 @@ public class PriorityQueueController {
         removeNodeFromFlowPane(queueNode);
     }
 
+    /**
+     * Знаходження розміру черги
+     */
     @FXML
     private void size() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -93,6 +113,9 @@ public class PriorityQueueController {
         alert.showAndWait();
     }
 
+    /**
+     * Видалення обраного вузла
+     */
     @FXML
     private void remove() {
         if (selectedNode == null) {
@@ -111,15 +134,18 @@ public class PriorityQueueController {
         selectedNode = null;
     }
 
+    /**
+     * Перемальовування вузлів в момент змінення черги
+     */
     private void redrawNodes() {
-        for (QueueNode<String> queueNode : queue) {
+        for (QueueNode<String> queueNode : queue) { // видалення всіх вузлів
             flowPane.getChildren().remove(queueNode.stackPane());
         }
 
-        for (QueueNode<String> queueNode : queue) {
+        for (QueueNode<String> queueNode : queue) { // відображення вузлів
             StackPane stackPane = queueNode.stackPane();
 
-            if (selectedNode != null && queueNode == selectedNode) {
+            if (selectedNode != null && queueNode == selectedNode) { // розмальовування контурів виділеного вузла
                 queueNode.rectangle().setStroke(Color.web("F2AE3A"));
             } else {
                 queueNode.rectangle().setStroke(Color.web("F2DF3A"));
@@ -129,9 +155,14 @@ public class PriorityQueueController {
         }
     }
 
+    /**
+     * Видалення елемента з панелі та реалізація анімації видалення
+     * @param node вузол, який необхідно видалити
+     */
     private void removeNodeFromFlowPane(QueueNode<String> node) {
         if (node == null) return;
 
+        // Створення анімації зменшення вузла
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(200));
         scaleTransition.setNode(node.stackPane());
         scaleTransition.setFromX(1);
@@ -142,6 +173,7 @@ public class PriorityQueueController {
         scaleTransition.setAutoReverse(false);
         scaleTransition.play();
 
+        // після завершення анімації видалити вузол
         scaleTransition.setOnFinished(event -> {
             flowPane.getChildren().remove(node.stackPane());
             redrawNodes();
