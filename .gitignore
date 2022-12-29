@@ -34,4 +34,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-Звіт_Java-Project-Team19-IN-06-2.docx
+*.docx
+dependency-reduced-pom.xml

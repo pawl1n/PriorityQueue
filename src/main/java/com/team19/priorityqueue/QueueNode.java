@@ -18,7 +18,6 @@ import java.util.Objects;
  */
 public class QueueNode<T> implements Comparable<QueueNode<?>> {
     private final StackPane stackPane;
-    private final T value;
     private final int priority;
     private final Rectangle rectangle;
 
@@ -33,26 +32,21 @@ public class QueueNode<T> implements Comparable<QueueNode<?>> {
      * stackPane - панель відображення вузлів
      */
     public QueueNode(T value, int priority) {
-        rectangle = new Rectangle(80,40);
-        rectangle.setFill(Color.WHITE);
+        rectangle = new Rectangle(80,40, Color.WHITE);
         rectangle.setStrokeWidth(5);
 
         String stringValue = value.toString();
         stringValue = stringValue.length() > 8 ? stringValue.substring(0, 5) + "..." : stringValue;
 
-        Text valueText = new Text(stringValue);
         Text priorityText = new Text(String.valueOf(priority));
-
         TextFlow priorityTextFlow = new TextFlow(priorityText);
         priorityTextFlow.prefHeight(0);
         priorityTextFlow.prefWidth(0);
         priorityTextFlow.setPadding(new Insets(3, 0, 0, 5));
 
+        Text valueText = new Text(stringValue);
         stackPane = new StackPane(rectangle, valueText, priorityTextFlow);
-        stackPane.prefHeight(0);
-        stackPane.prefWidth(0);
 
-        this.value = value;
         this.priority = priority;
     }
 
@@ -82,12 +76,14 @@ public class QueueNode<T> implements Comparable<QueueNode<?>> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         QueueNode<?> queueNode = (QueueNode<?>) o;
-        return priority == queueNode.priority && Objects.equals(stackPane, queueNode.stackPane) && Objects.equals(value, queueNode.value) && Objects.equals(rectangle, queueNode.rectangle);
+
+        return priority == queueNode.priority && Objects.equals(stackPane, queueNode.stackPane) &&
+                Objects.equals(rectangle, queueNode.rectangle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(stackPane, value, priority, rectangle);
+        return Objects.hash(stackPane, priority, rectangle);
     }
 
     /**
@@ -102,6 +98,10 @@ public class QueueNode<T> implements Comparable<QueueNode<?>> {
 
     @Override
     public String toString() {
-        return value.toString();
+        return "QueueNode{" +
+                "stackPane=" + stackPane +
+                ", priority=" + priority +
+                ", rectangle=" + rectangle +
+                '}';
     }
 }

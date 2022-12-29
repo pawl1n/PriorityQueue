@@ -17,19 +17,21 @@ public class PriorityQueueApplication extends Application {
      * @param stage сцена JavaFX додатку
      */
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PriorityQueueApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+    public void start(Stage stage) {
+        Scene scene;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(PriorityQueueApplication.class.getResource("main-view.fxml"));
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            AlertUtils.showError("Cannot load main view", e.getMessage());
+            return;
+        }
+
         stage.setTitle("PriorityQueue");
         stage.setScene(scene);
-        stage.show();
-
-        stage.setMinHeight(550);
-        stage.setMinWidth(860);
-        stage.setMaxHeight(550);
-        stage.setMaxWidth(860);
-
         stage.setResizable(false);
+
+        stage.show();
     }
 
     public static void main(String[] args) {

@@ -116,15 +116,7 @@ public final class PriorityQueue<T> implements Iterable<T> {
 
    @Override
    public String toString() {
-      StringBuilder result = new StringBuilder();
-      result.append("[");
-      for (int i = 0; i < size; i++) {
-         result.append(nodes[i]);
-         if (i != size-1) result.append(", ");
-      }
-      result.append("]");
-
-      return result.toString();
+      return Arrays.toString(nodes);
    }
 
    @Override
