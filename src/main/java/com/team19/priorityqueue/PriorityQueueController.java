@@ -144,7 +144,6 @@ public class PriorityQueueController {
 
         scaleTransition.setOnFinished(event -> {
             flowPane.getChildren().remove(node.stackPane());
-            redrawNodes();
         });
     }
 
