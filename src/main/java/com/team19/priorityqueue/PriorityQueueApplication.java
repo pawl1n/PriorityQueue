@@ -8,12 +8,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * PriorityQueueApplication - класс вікна проограми, яке включае всі його параметри,
- * такі як: розмір, назву елементи и т.д.
- * scene - вікно программи
+ * Основний клас JavaFX програми
  */
 public class PriorityQueueApplication extends Application {
 
+    /**
+     * Відкриває вікно програми та встановлює його параметри
+     * @param stage сцена JavaFX додатку
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PriorityQueueApplication.class.getResource("main-view.fxml"));

@@ -10,7 +10,7 @@ import javafx.scene.text.TextFlow;
 import java.util.Objects;
 
 /**
- * QueueNode - клас черги
+ * Вузол черги
  * value - значення вузла
  * priority - пріорітетність вузла
  * rectangle - тіло вузла
@@ -23,6 +23,7 @@ public class QueueNode<T> implements Comparable<QueueNode<?>> {
     private final Rectangle rectangle;
 
     /**
+     * Конструктор вузла
      * value - значення вузла
      * priority - пріорітетність вузла
      * rectangle - об'єкт тіла вузла
@@ -56,26 +57,26 @@ public class QueueNode<T> implements Comparable<QueueNode<?>> {
     }
 
     /**
-     * rectangle - метод повернення обьекта тіла вузла
+     * Повертає обьект тіла вузла
      */
     public Rectangle rectangle() {
         return rectangle;
     }
+
     /**
-     * stackPane - метод повернення панель вузлів
+     * Повертає панель вузлів
      */
     public StackPane stackPane() {
         return stackPane;
     }
+
     /**
-     * priority - метод повернення пріорітету вузла
+     * Повертає пріоритет вузла
      */
     private int priority() {
         return this.priority;
     }
-    /**
-     * equals - метод перевірки на еквалентність
-     */
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,23 +84,22 @@ public class QueueNode<T> implements Comparable<QueueNode<?>> {
         QueueNode<?> queueNode = (QueueNode<?>) o;
         return priority == queueNode.priority && Objects.equals(stackPane, queueNode.stackPane) && Objects.equals(value, queueNode.value) && Objects.equals(rectangle, queueNode.rectangle);
     }
-    /**
-     * hashCode - метод отримання індивідуального хеш-номеру для об'єкта
-     */
+
     @Override
     public int hashCode() {
         return Objects.hash(stackPane, value, priority, rectangle);
     }
+
     /**
-     * compareTo - метод порівняння пріорітетів двух вузлів
+     * Порівнює пріоритети вузлів
+     * @param queueNode об'єкт, з яким необхідно порівняти
+     * @return результат порівняння пріоритетів
      */
     @Override
     public int compareTo(QueueNode<?> queueNode) {
         return Integer.compare(priority, queueNode.priority);
     }
-    /**
-     * compareTo - метод виведення на екран значення вузла
-     */
+
     @Override
     public String toString() {
         return value.toString();

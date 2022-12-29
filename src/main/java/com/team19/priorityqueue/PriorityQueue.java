@@ -3,85 +3,85 @@ package com.team19.priorityqueue;
 import java.util.*;
 
 /**
- * PriorityQueue - клас пріорітетної черги
- * nodes - вузли
+ * Зпрощений варіант Java PriorityQueue, що зберігає дані у вигляді масиву а не дерева
+ * T - тип елементів черги
+ * nodes - вузли (елементи) черги
  * size - розмір черги
  */
 public final class PriorityQueue<T> implements Iterable<T> {
    private T[] nodes;
    private int size = 0;
+
    /**
-    * PriorityQueue - конструктор створення черги
-    * nodes - вузли
-    * size - розмір черги
+    * PriorityQueue - основний конструктор черги
     */
    @SuppressWarnings("unchecked")
    public PriorityQueue() {
       nodes = (T[]) new Object[10];
       size = 0;
    }
+
    /**
-    * add - метод створення додавання вузла в чергу, включае створення самого вузла, надання йому пріорітету,
-    * розміщення в черзі
-    * nodes - вузли
-    * size - розмір черги
-    * value - значення вузла
+    * Додає елемент в чергу в залежності від пріоритету
+    * @param element - елемент, що необхідно додати
     */
    @SuppressWarnings("unchecked")
-   public void add(T value) {
-      if (value == null)
+   public void add(T element) {
+      if (element == null)
          throw new NullPointerException("Value can't be null");
 
       grow();
 
-      Comparable<? super T> key = (Comparable<? super T>) value;
+      Comparable<? super T> key = (Comparable<? super T>) element;
       int i;
       for (i = size; i > 0; i--) {
          if (key.compareTo(nodes[i-1]) <= 0)
             break;
          nodes[i] = nodes[i-1];
       }
-      nodes[i] = value;
+      nodes[i] = element;
 
       size++;
    }
 
    /**
-    * grow - метод
-    * nodes - всі вузли
+    * Збільшує розмір черги, якщо вона вже заповнена
     */
    private void grow() {
       if (size == nodes.length) {
          nodes = Arrays.copyOf(nodes, (int) (nodes.length * 1.5));
       }
    }
+
    /**
-    * size - метод, який повертає розмір черги
+    * Повертає розмір черги
+    * @return розмір черги
     */
    public int size() {
       return size;
    }
+
    /**
-    * clear - метод, який чистить чергу
-    * nodes - всі вузли
+    * Чистить чергу
     */
    @SuppressWarnings("unchecked")
    public void clear() {
       nodes = (T[]) new Object[10];
       size = 0;
    }
+
    /**
-    * peek - метод, який знаходить найпріорітетний вузол
-    * size - розмір черги
-    * nodes - всі вузли
+    * Повертає найпріорітетніший елемент
+    * @return найпріорітетніший елемент
     */
    public T peek() {
       if (size == 0) return null;
       return nodes[0];
    }
+
    /**
-    * poll - метод, який видаляє найпріорітетний вузол
-    * size - розмір черги
+    * Видаляє найпріорітетніший елемент
+    * @return видалений елемент
     */
    public T poll() {
       if (size == 0) return null;
@@ -91,9 +91,10 @@ public final class PriorityQueue<T> implements Iterable<T> {
 
       return peek;
    }
+
    /**
-    * remove - метод, який видаляє вибраний вузол
-    * position - позиція вузла
+    * Видаляє вибраний вузол
+    * @param node вузол, що треба видалити
     */
    public void remove(T node) {
       int position;
@@ -112,9 +113,7 @@ public final class PriorityQueue<T> implements Iterable<T> {
 
       size--;
    }
-   /**
-    * toString - метод, який виводить значення вузла на екран
-    */
+
    @Override
    public String toString() {
       StringBuilder result = new StringBuilder();
@@ -127,22 +126,20 @@ public final class PriorityQueue<T> implements Iterable<T> {
 
       return result.toString();
    }
-   /**
-    * equals - метод перевірки на еквалентність
-    */
+
    @Override
    public boolean equals(Object o) {
       if (this == o) return true;
       if (!(o instanceof PriorityQueue<?> that)) return false;
+
       return size == that.size && Arrays.equals(nodes, that.nodes);
    }
-   /**
-    * hashCode - метод отримання індивідуального хеш-номеру для об'єкта
-    */
+
    @Override
    public int hashCode() {
       int result = Objects.hash(size);
       result = 31 * result + Arrays.hashCode(nodes);
+
       return result;
    }
 
@@ -151,6 +148,9 @@ public final class PriorityQueue<T> implements Iterable<T> {
       return new Itr();
    }
 
+   /**
+    * Клас, що є реалізує ітератор для елементів черги
+    */
    private class Itr implements Iterator<T> {
       int cursor = 0;
 
