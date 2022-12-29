@@ -19,14 +19,9 @@
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>${javafx-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>default-cli</id>
-            <configuration>
-              <mainClass>${main.class}/${javafx.main.class}</mainClass>
-            </configuration>
-          </execution>
-        </executions>
+        <configuration>
+          <mainClass>com.team19.priorityqueue/com.team19.priorityqueue.PriorityQueueApplication</mainClass>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
@@ -37,6 +32,7 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
               <transformers>
                 <transformer>
                   <mainClass>com.team19.priorityqueue.Main</mainClass>
@@ -50,8 +46,6 @@
   </build>
   <properties>
     <javafx-maven-plugin.version>0.0.8</javafx-maven-plugin.version>
-    <main.class>com.team19.priorityqueue</main.class>
-    <javafx.main.class>com.team19.priorityqueue.PriorityQueueApplication</javafx.main.class>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     <junit.version>5.9.0</junit.version>
