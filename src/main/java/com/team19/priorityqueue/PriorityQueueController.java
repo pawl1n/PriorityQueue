@@ -2,7 +2,6 @@ package com.team19.priorityqueue;
 
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
@@ -30,12 +29,11 @@ public class PriorityQueueController {
         try {
             priority = Integer.parseInt(priorityTextField.getText());
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid number passed as priority");
-            alert.setContentText("Enter valid number in priority field");
+            AlertUtils.showError(
+                    "Invalid number passed as priority",
+                    "Enter valid number in priority field"
+            );
 
-            alert.showAndWait();
             return;
         }
 
@@ -54,15 +52,12 @@ public class PriorityQueueController {
     @FXML
     private void peek() {
         QueueNode<String> peek = queue.peek();
-        if (peek == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText("Priority queue is empty");
-            alert.setContentText("Add some elements before getting peek");
 
-            alert.showAndWait();
+        if (peek == null) {
+            AlertUtils.showWarning("Priority queue is empty", "Add some elements before getting peek");
             return;
         }
+
         peek.rectangle().setStroke(Color.RED);
     }
 
@@ -71,12 +66,7 @@ public class PriorityQueueController {
         QueueNode<String> queueNode = queue.poll();
 
         if (queueNode == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Priority queue is empty");
-            alert.setContentText("Add some elements before removing");
-
-            alert.showAndWait();
+            AlertUtils.showError("Priority queue is empty", "Add some elements before removing");
             return;
         }
 
@@ -85,23 +75,15 @@ public class PriorityQueueController {
 
     @FXML
     private void size() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText("Size of priority queue");
-        alert.setContentText("The size of priority queue is " + queue.size());
+        int size = queue.size();
 
-        alert.showAndWait();
+        AlertUtils.showInformation("Size of priority queue", "The size of priority queue is " + size);
     }
 
     @FXML
     private void remove() {
         if (selectedNode == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Node is not selected");
-            alert.setContentText("Select a node before removing");
-
-            alert.showAndWait();
+            AlertUtils.showError("Node is not selected", "Select a node before removing");
             return;
         }
 
