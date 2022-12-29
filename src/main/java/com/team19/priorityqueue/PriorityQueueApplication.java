@@ -10,9 +10,16 @@ import java.io.IOException;
 public class PriorityQueueApplication extends Application {
 
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PriorityQueueApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+    public void start(Stage stage) {
+        Scene scene;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(PriorityQueueApplication.class.getResource("main-view.fxml"));
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            AlertUtils.showError("Cannot load main view", e.getMessage());
+            return;
+        }
+
         stage.setTitle("PriorityQueue");
         stage.setScene(scene);
         stage.setResizable(false);
