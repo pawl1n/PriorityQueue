@@ -48,6 +48,7 @@ public final class PriorityQueue<T> implements Iterable<T> {
 
    /**
     * grow - метод
+    * nodes - всі вузли
     */
    private void grow() {
       if (size == nodes.length) {
@@ -62,6 +63,7 @@ public final class PriorityQueue<T> implements Iterable<T> {
    }
    /**
     * clear - метод, який чистить чергу
+    * nodes - всі вузли
     */
    @SuppressWarnings("unchecked")
    public void clear() {
@@ -69,14 +71,17 @@ public final class PriorityQueue<T> implements Iterable<T> {
       size = 0;
    }
    /**
-    * clear - метод, який знаходить найпріорітетний вузол
+    * peek - метод, який знаходить найпріорітетний вузол
+    * size - розмір черги
+    * nodes - всі вузли
     */
    public T peek() {
       if (size == 0) return null;
       return nodes[0];
    }
    /**
-    * clear - метод, який видаляє найпріорітетний вузол
+    * poll - метод, який видаляє найпріорітетний вузол
+    * size - розмір черги
     */
    public T poll() {
       if (size == 0) return null;
