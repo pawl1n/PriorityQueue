@@ -2,56 +2,87 @@ package com.team19.priorityqueue;
 
 import java.util.*;
 
+/**
+ * Зпрощений варіант Java PriorityQueue, що зберігає дані у вигляді масиву а не дерева
+ * T - тип елементів черги
+ * nodes - вузли (елементи) черги
+ * size - розмір черги
+ */
 public final class PriorityQueue<T> implements Iterable<T> {
    private T[] nodes;
    private int size = 0;
 
+   /**
+    * PriorityQueue - основний конструктор черги
+    */
    @SuppressWarnings("unchecked")
    public PriorityQueue() {
       nodes = (T[]) new Object[10];
       size = 0;
    }
 
+   /**
+    * Додає елемент в чергу в залежності від пріоритету
+    * @param element - елемент, що необхідно додати
+    */
    @SuppressWarnings("unchecked")
-   public void add(T value) {
-      if (value == null)
+   public void add(T element) {
+      if (element == null)
          throw new NullPointerException("Value can't be null");
 
       grow();
 
-      Comparable<? super T> key = (Comparable<? super T>) value;
+      Comparable<? super T> key = (Comparable<? super T>) element;
       int i;
       for (i = size; i > 0; i--) {
          if (key.compareTo(nodes[i-1]) <= 0)
             break;
          nodes[i] = nodes[i-1];
       }
-      nodes[i] = value;
+      nodes[i] = element;
 
       size++;
    }
 
+   /**
+    * Збільшує розмір черги, якщо вона вже заповнена
+    */
    private void grow() {
       if (size == nodes.length) {
          nodes = Arrays.copyOf(nodes, (int) (nodes.length * 1.5));
       }
    }
 
+   /**
+    * Повертає розмір черги
+    * @return розмір черги
+    */
    public int size() {
       return size;
    }
 
+   /**
+    * Чистить чергу
+    */
    @SuppressWarnings("unchecked")
    public void clear() {
       nodes = (T[]) new Object[10];
       size = 0;
    }
 
+   /**
+    * Повертає найпріорітетніший елемент
+    * @return найпріорітетніший елемент
+    */
    public T peek() {
       if (size == 0) return null;
       return nodes[0];
    }
 
+   /**
+    * Видаляє найпріорітетніший елемент
+    * @return видалений елемент
+    */
    public T poll() {
       if (size == 0) return null;
 
@@ -61,6 +92,10 @@ public final class PriorityQueue<T> implements Iterable<T> {
       return peek;
    }
 
+   /**
+    * Видаляє вибраний вузол
+    * @param node вузол, що треба видалити
+    */
    public void remove(T node) {
       int position;
 
@@ -88,6 +123,7 @@ public final class PriorityQueue<T> implements Iterable<T> {
    public boolean equals(Object o) {
       if (this == o) return true;
       if (!(o instanceof PriorityQueue<?> that)) return false;
+
       return size == that.size && Arrays.equals(nodes, that.nodes);
    }
 
@@ -95,6 +131,7 @@ public final class PriorityQueue<T> implements Iterable<T> {
    public int hashCode() {
       int result = Objects.hash(size);
       result = 31 * result + Arrays.hashCode(nodes);
+
       return result;
    }
 
@@ -103,6 +140,9 @@ public final class PriorityQueue<T> implements Iterable<T> {
       return new Itr();
    }
 
+   /**
+    * Клас, що є реалізує ітератор для елементів черги
+    */
    private class Itr implements Iterator<T> {
       int cursor = 0;
 

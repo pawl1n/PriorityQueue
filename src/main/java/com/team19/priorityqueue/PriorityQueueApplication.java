@@ -7,8 +7,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Основний клас JavaFX програми
+ */
 public class PriorityQueueApplication extends Application {
 
+    /**
+     * Відкриває вікно програми та встановлює його параметри
+     * @param stage сцена JavaFX додатку
+     */
     @Override
     public void start(Stage stage) {
         Scene scene;
