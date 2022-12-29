@@ -2,16 +2,31 @@ package com.team19.priorityqueue;
 
 import java.util.*;
 
+/**
+ * PriorityQueue - клас пріорітетної черги
+ * nodes - вузли
+ * size - розмір черги
+ */
 public final class PriorityQueue<T> implements Iterable<T> {
    private T[] nodes;
    private int size = 0;
-
+   /**
+    * PriorityQueue - конструктор створення черги
+    * nodes - вузли
+    * size - розмір черги
+    */
    @SuppressWarnings("unchecked")
    public PriorityQueue() {
       nodes = (T[]) new Object[10];
       size = 0;
    }
-
+   /**
+    * add - метод створення додавання вузла в чергу, включае створення самого вузла, надання йому пріорітету,
+    * розміщення в черзі
+    * nodes - вузли
+    * size - розмір черги
+    * value - значення вузла
+    */
    @SuppressWarnings("unchecked")
    public void add(T value) {
       if (value == null)
@@ -31,27 +46,38 @@ public final class PriorityQueue<T> implements Iterable<T> {
       size++;
    }
 
+   /**
+    * grow - метод
+    */
    private void grow() {
       if (size == nodes.length) {
          nodes = Arrays.copyOf(nodes, (int) (nodes.length * 1.5));
       }
    }
-
+   /**
+    * size - метод, який повертає розмір черги
+    */
    public int size() {
       return size;
    }
-
+   /**
+    * clear - метод, який чистить чергу
+    */
    @SuppressWarnings("unchecked")
    public void clear() {
       nodes = (T[]) new Object[10];
       size = 0;
    }
-
+   /**
+    * clear - метод, який знаходить найпріорітетний вузол
+    */
    public T peek() {
       if (size == 0) return null;
       return nodes[0];
    }
-
+   /**
+    * clear - метод, який видаляє найпріорітетний вузол
+    */
    public T poll() {
       if (size == 0) return null;
 
@@ -60,7 +86,10 @@ public final class PriorityQueue<T> implements Iterable<T> {
 
       return peek;
    }
-
+   /**
+    * remove - метод, який видаляє вибраний вузол
+    * position - позиція вузла
+    */
    public void remove(T node) {
       int position;
 
@@ -78,7 +107,9 @@ public final class PriorityQueue<T> implements Iterable<T> {
 
       size--;
    }
-
+   /**
+    * toString - метод, який виводить значення вузла на екран
+    */
    @Override
    public String toString() {
       StringBuilder result = new StringBuilder();
@@ -91,14 +122,18 @@ public final class PriorityQueue<T> implements Iterable<T> {
 
       return result.toString();
    }
-
+   /**
+    * equals - метод перевірки на еквалентність
+    */
    @Override
    public boolean equals(Object o) {
       if (this == o) return true;
       if (!(o instanceof PriorityQueue<?> that)) return false;
       return size == that.size && Arrays.equals(nodes, that.nodes);
    }
-
+   /**
+    * hashCode - метод отримання індивідуального хеш-номеру для об'єкта
+    */
    @Override
    public int hashCode() {
       int result = Objects.hash(size);

@@ -7,6 +7,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * PriorityQueueApplication - класс вікна проограми, яке включае всі його параметри,
+ * такі як: розмір, назву елементи и т.д.
+ * scene - вікно программи
+ */
 public class PriorityQueueApplication extends Application {
 
     @Override

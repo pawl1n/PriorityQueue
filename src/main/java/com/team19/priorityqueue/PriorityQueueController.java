@@ -9,6 +9,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+/**
+ * PriorityQueueController - класс панелі контролю пріорітетної черги
+ * queue - черга
+ * flowPane - Панель відображення черги
+ * valueTextField - поле вводу для значення вузла
+ * priorityTextField - поле вводу для пріорітетності вузла
+ */
 public class PriorityQueueController {
     private final PriorityQueue<QueueNode<String>> queue = new PriorityQueue<>();
     private QueueNode<String> selectedNode;
@@ -22,6 +29,14 @@ public class PriorityQueueController {
     @FXML
     private TextField priorityTextField;
 
+    /**
+     * add - додає новий елемент в чергу, бере значення з полів в які інформацію вводить користувач
+     * value - значення в середині вузла
+     * priority - пріорітет вузла
+     * queueNode - об'єкт черги
+     * flowPane - панель відображення вузлів
+     * queue - черга
+     */
     @FXML
     private void add() {
         String value = valueTextField.getText();
@@ -51,6 +66,9 @@ public class PriorityQueueController {
         redrawNodes();
     }
 
+    /**
+     * peek - метод знаходження  а виділення елемента з найбільшим пріорітетом
+     */
     @FXML
     private void peek() {
         QueueNode<String> peek = queue.peek();
@@ -66,6 +84,10 @@ public class PriorityQueueController {
         peek.rectangle().setStroke(Color.RED);
     }
 
+    /**
+     * poll - видаляє елемент з найбільшою пріорітетністю
+     * queueNode - об'єкт черги
+     */
     @FXML
     private void poll() {
         QueueNode<String> queueNode = queue.poll();
@@ -83,6 +105,9 @@ public class PriorityQueueController {
         removeNodeFromFlowPane(queueNode);
     }
 
+    /**
+     * size - метод знаходження розміру черги
+     */
     @FXML
     private void size() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -93,6 +118,11 @@ public class PriorityQueueController {
         alert.showAndWait();
     }
 
+    /**
+     * remove - метод видалення
+     * selectedNode - вибраний елемент
+     * queue - черга
+     */
     @FXML
     private void remove() {
         if (selectedNode == null) {
@@ -111,6 +141,11 @@ public class PriorityQueueController {
         selectedNode = null;
     }
 
+    /**
+     * redrawNodes - метод перемальовування вузлів в момент змінення черги
+     * queueNode - об'єкт черги
+     * flowPane - панель, на якій знаходиться всі вузли
+     */
     private void redrawNodes() {
         for (QueueNode<String> queueNode : queue) {
             flowPane.getChildren().remove(queueNode.stackPane());
@@ -129,6 +164,11 @@ public class PriorityQueueController {
         }
     }
 
+    /**
+     * removeNodeFromFlowPane - метод включае видалення елемента з панелі та реалізація анімації
+     * node - елемент який видаляється
+     *
+     */
     private void removeNodeFromFlowPane(QueueNode<String> node) {
         if (node == null) return;
 
