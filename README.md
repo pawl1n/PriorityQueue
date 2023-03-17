@@ -1,3 +1,3 @@
 # PriorityQueue
 
-JavaFX project for visualising basic operations with priority queue
+JavaFX project for visualising basic operations with a priority queue
